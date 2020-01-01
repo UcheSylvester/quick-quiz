@@ -2,7 +2,7 @@ const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'))
 
 let currentQuestion = {}
-let acceptingAnswers = true;
+let acceptingAnswers = false;
 let scores = 0;
 let questionCounter = 0;
 let availableQuestions = []
@@ -20,8 +20,8 @@ let questions = [
     question: "What is the correct syntax for referring to an external script called xxx.js??",
     choice1: "<script href='xxx.js'>",
     choice2: "<script name='xxx.js'>",
-    choice2: "<script src='xxx.js'>",
-    choice2: "<script file='xxx.js'>",
+    choice3: "<script src='xxx.js'>",
+    choice4: "<script file='xxx.js'>",
     answer: 3
   },
   {
@@ -57,6 +57,14 @@ const startGame = () => {
 }
 
 const getNewQuestion = () => {
+  // when questions are finished or we've reached the maximum number of question a user can anwser
+  // go to end page
+  if (!availableQuestions.length) {
+    // go to end page
+    return window.location.assign("/end.html")
+
+  }
+
   // Increasing the question by 1
   questionCounter++
 
@@ -67,10 +75,43 @@ const getNewQuestion = () => {
   // Display the current question 
   question.innerText = currentQuestion.question;
 
+  // Display the choices
   choices.forEach(choice => {
     const number = choice.dataset['number']
     choice.innerText = currentQuestion["choice" + number]
   })
+
+  // removing the current question so it doesn't get asked again
+  availableQuestions.splice(newQestionIndex, 1);
+
+  acceptingAnswers = true;
+
+  checkCorrectAnswer(currentQuestion)
+
+  console.log(availableQuestions)
+
 }
+
+const checkCorrectAnswer = (currentQuestion) => {
+  choices.forEach(choice => {
+    choice.addEventListener('click', e => {
+
+      if (!acceptingAnswers) return;
+
+      acceptingAnswers = false;
+      const selectedChoice = e.target;
+      const selectedAnswer = +choice.dataset['number']
+
+      // if (number === currentQuestion.answer) {
+      //   console.log('correct')
+      // } else {
+      //   console.log('dlld')
+      // }
+
+      getNewQuestion()
+    })
+  })
+}
+
 
 startGame()
