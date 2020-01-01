@@ -1,6 +1,5 @@
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'))
-console.log(question, choices)
 
 let currentQuestion = {}
 let acceptingAnswers = true;
@@ -10,7 +9,7 @@ let availableQuestions = []
 
 let questions = [
   {
-    question: "inside which HTML element do we put the JavaScript??",
+    question: "1inside which HTML element do we put the JavaScript??",
     choice1: "<script>",
     choice2: "<javascript>",
     choice3: "<js>",
@@ -26,7 +25,7 @@ let questions = [
     answer: 3
   },
   {
-    question: "inside which HTML element do we put the JavaScript??",
+    question: "2inside which HTML element do we put the JavaScript??",
     choice1: "<script>",
     choice2: "<javascript>",
     choice3: "<js>",
@@ -34,7 +33,7 @@ let questions = [
     answer: 1
   },
   {
-    question: "inside which HTML element do we put the JavaScript??",
+    question: "3inside which HTML element do we put the JavaScript??",
     choice1: "<script>",
     choice2: "<javascript>",
     choice3: "<js>",
@@ -45,3 +44,33 @@ let questions = [
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 3;
+
+const startGame = () => {
+  // reseting util variables at game start
+  // Getting a copy of the questions into available question using spread operator
+  questionCounter = 0;
+  score = 0;
+  availableQuestions = [...questions]
+
+  // Getting a new question
+  getNewQuestion()
+}
+
+const getNewQuestion = () => {
+  // Increasing the question by 1
+  questionCounter++
+
+  // Get a random question and assign it to currentQeustion
+  const newQestionIndex = Math.floor(Math.random() * availableQuestions.length);
+  currentQuestion = availableQuestions[newQestionIndex]
+
+  // Display the current question 
+  question.innerText = currentQuestion.question;
+
+  choices.forEach(choice => {
+    const number = choice.dataset['number']
+    choice.innerText = currentQuestion["choice" + number]
+  })
+}
+
+startGame()
