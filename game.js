@@ -1,9 +1,11 @@
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'))
+const scoreText = document.getElementById('score')
+const questionCounterText = document.getElementById('questionCounter')
 
 let currentQuestion = {}
 let acceptingAnswers = false;
-let scores = 0;
+let score = 0;
 let questionCounter = 0;
 let availableQuestions = []
 
@@ -67,6 +69,9 @@ const getNewQuestion = () => {
 
   // Increasing the question by 1
   questionCounter++
+
+  console.log(availableQuestions.length, questionCounter)
+  questionCounterText.innerText = questionCounter + '/' + questions.length
 
   // Get a random question and assign it to currentQeustion
   const newQestionIndex = Math.floor(Math.random() * availableQuestions.length);
