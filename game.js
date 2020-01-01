@@ -45,7 +45,7 @@ let questions = [
 ]
 
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 4;
 
 const startGame = () => {
   // reseting util variables at game start
@@ -63,15 +63,14 @@ const getNewQuestion = () => {
   // go to end page
   if (!availableQuestions.length) {
     // go to end page
-    return window.location.assign("/end.html")
+    // return window.location.assign("/end.html")
+    return window.location.reload()
 
   }
 
-  // Increasing the question by 1
+  // Increasing the question by 1 and display the question count
   questionCounter++
-
-  console.log(availableQuestions.length, questionCounter)
-  questionCounterText.innerText = questionCounter + '/' + questions.length
+  questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`
 
   // Get a random question and assign it to currentQeustion
   const newQestionIndex = Math.floor(Math.random() * availableQuestions.length);
@@ -98,18 +97,23 @@ const getNewQuestion = () => {
 // Check for correct answer
 choices.forEach(choice => {
   choice.addEventListener('click', e => {
-
+    // stop if we are not accepting questions
     if (!acceptingAnswers) return;
 
     acceptingAnswers = false;
     const selectedChoice = e.target;
     const selectedAnswer = +choice.dataset['number']
 
+    // Styles to apply if answer is correct or not
     const classToApply = selectedAnswer === currentQuestion.answer ? 'correct' : 'incorrect'
-    console.log(classToApply)
 
     selectedChoice.parentElement.classList.add(classToApply)
 
+    if (classToApply) {
+      incrementScore(CORRECT_BONUS)
+    }
+
+    // delay the style before moving to next question
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply)
       getNewQuestion()
@@ -118,6 +122,11 @@ choices.forEach(choice => {
 
   })
 })
+
+const incrementScore = number => {
+  score += number
+  scoreText.innerText = score;
+}
 
 
 startGame()
