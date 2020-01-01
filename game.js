@@ -86,32 +86,33 @@ const getNewQuestion = () => {
 
   acceptingAnswers = true;
 
-  checkCorrectAnswer(currentQuestion)
-
   console.log(availableQuestions)
 
 }
 
-const checkCorrectAnswer = (currentQuestion) => {
-  choices.forEach(choice => {
-    choice.addEventListener('click', e => {
+// Check for correct answer
+choices.forEach(choice => {
+  choice.addEventListener('click', e => {
 
-      if (!acceptingAnswers) return;
+    if (!acceptingAnswers) return;
 
-      acceptingAnswers = false;
-      const selectedChoice = e.target;
-      const selectedAnswer = +choice.dataset['number']
+    acceptingAnswers = false;
+    const selectedChoice = e.target;
+    const selectedAnswer = +choice.dataset['number']
 
-      // if (number === currentQuestion.answer) {
-      //   console.log('correct')
-      // } else {
-      //   console.log('dlld')
-      // }
+    const classToApply = selectedAnswer === currentQuestion.answer ? 'correct' : 'incorrect'
+    console.log(classToApply)
 
+    selectedChoice.parentElement.classList.add(classToApply)
+
+    setTimeout(() => {
+      selectedChoice.parentElement.classList.remove(classToApply)
       getNewQuestion()
-    })
+    }, 500)
+
+
   })
-}
+})
 
 
 startGame()
