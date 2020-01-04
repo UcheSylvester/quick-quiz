@@ -64,8 +64,8 @@ const getNewQuestion = () => {
   // go to end page
   if (!availableQuestions.length) {
     // go to end page
-    // return window.location.assign("/end.html")
-    return window.location.reload()
+    return window.location.assign("/end.html")
+    // return window.location.reload()
 
   }
 
