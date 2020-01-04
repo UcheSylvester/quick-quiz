@@ -62,7 +62,11 @@ const startGame = () => {
 const getNewQuestion = () => {
   // when questions are finished or we've reached the maximum number of question a user can anwser
   // go to end page
-  if (!availableQuestions.length) {
+
+  if (!availableQuestions.length || questionCounter >= MAX_QUESTIONS) {
+    // save recent score to localstorage
+    localStorage.setItem('mostRecentScore', score)
+
     // go to end page
     return window.location.assign("/end.html")
     // return window.location.reload()
@@ -91,8 +95,6 @@ const getNewQuestion = () => {
   availableQuestions.splice(newQestionIndex, 1);
 
   acceptingAnswers = true;
-
-  console.log(availableQuestions)
 
 }
 
