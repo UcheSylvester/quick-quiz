@@ -16,15 +16,22 @@ username.addEventListener('keyup', () => {
 })
 
 const saveHighScore = (e) => {
-  console.log('hello')
   e.preventDefault()
 
   const score = {
-    score: mostRecentscore || 0,
+    score: Math.floor(Math.random() * 100),
     username: username.value
   }
 
   highScores.push(score)
 
+  // sorting in ascending order
+  highScores.sort((a, b) => b.score - a.score)
+
+  // Removing other scores at the 5th index, still sorting in ascending order
+  highScores.splice(5)
+
   localStorage.setItem('highScores', JSON.stringify(highScores))
+  console.log(highScores)
+
 }
