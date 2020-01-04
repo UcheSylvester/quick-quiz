@@ -69,7 +69,7 @@ const getNewQuestion = () => {
 
   }
 
-  // Increasing the question by 1, progressbar and display the question count
+  // Increasing the question couter and progressbar
   questionCounter++
   progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`
   progressBar.style.width = `${questionCounter / MAX_QUESTIONS * 100}%`;
@@ -111,9 +111,9 @@ choices.forEach(choice => {
 
     selectedChoice.parentElement.classList.add(classToApply)
 
-    if (classToApply === 'correct') {
+    if (classToApply === 'correct')
       incrementScore(CORRECT_BONUS)
-    }
+
 
     // delay the style before moving to next question
     setTimeout(() => {
