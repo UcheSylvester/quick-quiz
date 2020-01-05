@@ -114,7 +114,6 @@ const getCorrectAnswer = (choices) => {
 }
 
 
-
 // Check for correct answer
 choices.forEach((choice, index, choices) => {
 
@@ -133,8 +132,6 @@ choices.forEach((choice, index, choices) => {
 
     // console.log(selectedAnswer, currentQuestion, choices)
 
-    getCorrectAnswer(choices)
-
     if (classToApply === 'correct')
       incrementScore(CORRECT_BONUS)
 
@@ -144,6 +141,8 @@ choices.forEach((choice, index, choices) => {
       selectedChoice.parentElement.classList.remove(classToApply)
       getNewQuestion()
     }, 1000)
+
+    getCorrectAnswer(choices)
 
   })
 })

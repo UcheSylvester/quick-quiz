@@ -5,6 +5,7 @@
   font-size: 1.8rem;
   border: 0.1rem solid rgb(86, 165, 235, 0.25);
   background-color: white;
+  transition: all 0.5s;
 }
 
 .choice-container:hover {
@@ -27,10 +28,12 @@
 
 .correct {
   background-color: #28a745;
+  transition: all 0.5s;
 }
 
 .incorrect {
   background-color: #dc3545;
+  transition: all 0.5s;
 }
 
 /* HUD */
