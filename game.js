@@ -9,6 +9,7 @@ let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = []
+let correctAnswer
 
 let questions = [
   {
@@ -69,8 +70,6 @@ const getNewQuestion = () => {
 
     // go to end page
     return window.location.assign("/end.html")
-    // return window.location.reload()
-
   }
 
   // Increasing the question couter and progressbar
@@ -98,8 +97,27 @@ const getNewQuestion = () => {
 
 }
 
+// Get and style correct answer 
+const getCorrectAnswer = (choices) => {
+  choices.forEach(choice => {
+    if (+choice.dataset['number'] === currentQuestion.answer)
+      correctAnswer = choice
+  })
+
+  setTimeout(() => {
+    correctAnswer.classList.add('correct')
+  }, 300)
+
+  setTimeout(() => {
+    correctAnswer.classList.remove('correct')
+  }, 1000)
+}
+
+
+
 // Check for correct answer
-choices.forEach(choice => {
+choices.forEach((choice, index, choices) => {
+
   choice.addEventListener('click', e => {
     // stop if we are not accepting questions
     if (!acceptingAnswers) return;
@@ -113,6 +131,10 @@ choices.forEach(choice => {
 
     selectedChoice.parentElement.classList.add(classToApply)
 
+    // console.log(selectedAnswer, currentQuestion, choices)
+
+    getCorrectAnswer(choices)
+
     if (classToApply === 'correct')
       incrementScore(CORRECT_BONUS)
 
@@ -121,8 +143,7 @@ choices.forEach(choice => {
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply)
       getNewQuestion()
-    }, 500)
-
+    }, 1000)
 
   })
 })
