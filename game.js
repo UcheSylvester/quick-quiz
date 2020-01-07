@@ -3,6 +3,8 @@ const choices = Array.from(document.getElementsByClassName('choice-text'))
 const scoreText = document.getElementById('score')
 const progressText = document.getElementById('progressText')
 const progressBar = document.getElementById('progressBarFull')
+const game = document.getElementById('game');
+const loader = document.querySelector('.loader')
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 10;
@@ -38,7 +40,6 @@ fetch(API_URL)
         formattedQuestion[`choice${index + 1}`] = choice;
       })
 
-      // console.log(formattedQuestion)
       return formattedQuestion
     })
 
@@ -59,6 +60,11 @@ const startGame = () => {
 
   // Getting a new question
   getNewQuestion()
+
+  // Removing and adding loader
+  loader.classList.add('hidden')
+  game.classList.remove('hidden')
+
 }
 
 const getNewQuestion = () => {
