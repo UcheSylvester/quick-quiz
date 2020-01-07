@@ -4,6 +4,8 @@ const scoreText = document.getElementById('score')
 const progressText = document.getElementById('progressText')
 const progressBar = document.getElementById('progressBarFull')
 
+const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple'
+
 let currentQuestion = {}
 let acceptingAnswers = false;
 let score = 0;
@@ -13,13 +15,35 @@ let correctAnswer
 
 let questions = []
 
-fetch('questions.json')
+fetch(API_URL)
   .then(response => response.json())
-  .then(data => {
-    questions = data
+  .then(loadedQuestions => {
+
+    // formating the loaded question into what we need
+    const formattedQuestions = loadedQuestions.results.map(loadedQuestion => {
+      console.log(loadedQuestion.correct_answer)
+      const formattedQuestion = {
+        question: loadedQuestion.question,
+      }
+
+      const answerChoices = [...loadedQuestion.incorrect_answers];
+      formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
+
+      answerChoices.splice(formattedQuestion.answer - 1, 0, loadedQuestion.correct_answer)
+
+      answerChoices.forEach((choice, index) => {
+        formattedQuestion[`choice${index + 1}`] = choice;
+      })
+
+      // console.log(formattedQuestion)
+      return formattedQuestion
+    })
+
+    questions = formattedQuestions
+
     startGame()
   })
-  .catch(console.log)
+  .catch(err => console.log(err))
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 4;
