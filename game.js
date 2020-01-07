@@ -4,6 +4,9 @@ const scoreText = document.getElementById('score')
 const progressText = document.getElementById('progressText')
 const progressBar = document.getElementById('progressBarFull')
 
+const CORRECT_BONUS = 10;
+const MAX_QUESTIONS = 10;
+
 const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple'
 
 let currentQuestion = {}
@@ -45,8 +48,7 @@ fetch(API_URL)
   })
   .catch(err => console.log(err))
 
-const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 4;
+
 
 const startGame = () => {
   // reseting util variables at game start
@@ -62,13 +64,12 @@ const startGame = () => {
 const getNewQuestion = () => {
   // when questions are finished or we've reached the maximum number of question a user can anwser
   // go to end page
-
-  if (!availableQuestions.length || questionCounter >= MAX_QUESTIONS) {
+  if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
     // save recent score to localstorage
     localStorage.setItem('mostRecentScore', score)
 
     // go to end page
-    // return window.location.assign("/end.html")
+    return window.location.assign("/end.html")
   }
 
   // Increasing the question couter and progressbar
@@ -133,7 +134,6 @@ choices.forEach((choice, index, choices) => {
 
     if (classToApply === 'correct')
       incrementScore(CORRECT_BONUS)
-
 
     // delay the style before moving to next question
     setTimeout(() => {
