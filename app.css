@@ -74,6 +74,11 @@ h3 {
   text-align: center;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .hidden {
   display: none;
 }
