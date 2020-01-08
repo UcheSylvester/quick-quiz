@@ -2,7 +2,7 @@ const highScoresList = document.getElementById('highScoresList')
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 const noHighScore = document.getElementById('noHighScore')
 
-if (!highScores.lenght) {
+if (!highScores.length) {
   noHighScore.classList.remove('hidden')
 }
 
