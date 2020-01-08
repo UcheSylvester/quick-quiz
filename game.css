@@ -76,11 +76,11 @@ div.flex-row {
 }
 
 p#passed {
-  color: green;
+  color: #28a745;
 }
 
 p#failed {
-  color: red;
+  color: #dc3545;
 }
 
 /* LOADER */

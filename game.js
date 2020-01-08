@@ -5,6 +5,8 @@ const progressText = document.getElementById('progressText')
 const progressBar = document.getElementById('progressBarFull')
 const game = document.getElementById('game');
 const loader = document.querySelector('.loader')
+const passed = document.getElementById('passed')
+const failed = document.getElementById('failed')
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 10;
@@ -17,6 +19,8 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = []
 let correctAnswer
+let passedCounter = 0;
+let failedCounter = 0;
 
 let questions = []
 
@@ -56,6 +60,8 @@ const startGame = () => {
   // Getting a copy of the questions into available question using spread operator
   questionCounter = 0;
   score = 0;
+  failedCounter = 0;
+  passedCounter = 0
   availableQuestions = [...questions]
 
   // Getting a new question
@@ -136,10 +142,14 @@ choices.forEach((choice, index, choices) => {
 
     selectedChoice.parentElement.classList.add(classToApply)
 
-    // console.log(selectedAnswer, currentQuestion, choices)
-
-    if (classToApply === 'correct')
+    if (classToApply === 'correct') {
       incrementScore(CORRECT_BONUS)
+      passedCounter++
+      passed.innerText = `Passed - ${passedCounter}`
+    } else {
+      failedCounter++
+      failed.innerText = `Failed - ${failedCounter}`
+    }
 
     // delay the style before moving to next question
     setTimeout(() => {
