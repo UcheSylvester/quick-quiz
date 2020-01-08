@@ -13,3 +13,9 @@
 .high-score:hover {
   transform: scale(1.025);
 }
+
+#noHighScore {
+  font-size: 3rem;
+  margin-bottom: 5rem;
+  font-weight: 600;
+}
