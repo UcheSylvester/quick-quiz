@@ -26,7 +26,7 @@ fetch(API_URL)
 
     // formating the loaded question into what we need
     const formattedQuestions = loadedQuestions.results.map(loadedQuestion => {
-      console.log(loadedQuestion.correct_answer)
+      // console.log(loadedQuestion.correct_answer)
       const formattedQuestion = {
         question: loadedQuestion.question,
       }
