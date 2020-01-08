@@ -8,11 +8,8 @@ const playAgainBtn = document.getElementById('playAgainBtn')
 const mostRecentscore = +localStorage.getItem('mostRecentScore')
 
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
-console.log(highScores)
 
 const isValidHighScore = highScores.some((highScore) => mostRecentscore > highScore.score)
-
-console.log(isValidHighScore)
 
 if (isValidHighScore) {
   // show save high score 
@@ -23,8 +20,6 @@ if (isValidHighScore) {
   scoreMessage.innerText = 'Your score is';
   playAgainBtn.classList.remove('hidden')
 }
-
-// if()
 
 // displaying the final score;
 finalScore.innerText = mostRecentscore || 0;
@@ -48,7 +43,7 @@ const saveHighScore = (e) => {
   highScores.sort((a, b) => b.score - a.score)
 
   // Removing other scores at the 5th index, still sorting in ascending order
-  const now = highScores.splice(5)
+  highScores.splice(5)
 
   localStorage.setItem('highScores', JSON.stringify(highScores))
 
