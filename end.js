@@ -9,7 +9,11 @@ const mostRecentscore = +localStorage.getItem('mostRecentScore')
 
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 
-const isValidHighScore = highScores.some((highScore) => mostRecentscore > highScore.score)
+const isValidHighScore = (!highScores.length && mostRecentscore > 30)
+  ? true
+  : highScores.some((highScore) => (mostRecentscore > highScore.score))
+
+console.log(isValidHighScore)
 
 if (isValidHighScore) {
   // show save high score 
