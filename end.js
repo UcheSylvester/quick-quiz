@@ -17,7 +17,6 @@ const isValidHighScore = (highScores.length === 0 && mostRecentscore > 30)
   ? true
   : highScores.some((highScore) => (mostRecentscore > highScore.score))
 
-
 if (isValidHighScore) {
   // show save high score 
   saveHighScoreForm.classList.remove('hidden')
