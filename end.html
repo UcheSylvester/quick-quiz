@@ -10,9 +10,14 @@
   <body>
     <div class="container">
       <div id="end" class="flex-center flex-column">
-        <h1 id="finalScore">0</h1>
+        <h1>Congratulations!</h1>
 
-        <form>
+        <h2 id="scoreMessage">
+          New high score!
+        </h2>
+        <h2 id="finalScore"></h2>
+
+        <form id="saveHighScoreForm" class="hidden">
           <input
             type="text"
             name="username"
@@ -33,6 +38,10 @@
           <button class="btn" href="/game.html">Play Again</button>
           <button class="btn" href="/">Go Home</button>
         </form>
+
+        <button class="btn hidden" id="playAgainBtn" href="/game.html">
+          Play Again
+        </button>
       </div>
     </div>
 

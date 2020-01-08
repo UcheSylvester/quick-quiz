@@ -124,3 +124,13 @@ input {
 input::placeholder {
   color: #aaaaaa;
 }
+
+/* SAVE HIGH SCORE FORM */
+h2#scoreMessage {
+  color: #08355c;
+  margin-bottom: 0.5rem;
+}
+
+h2#finalScore {
+  color: #08355c;
+}
