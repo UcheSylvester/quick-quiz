@@ -3,17 +3,20 @@ const saveScoreBtn = document.getElementById('saveScoreBtn')
 const finalScore = document.getElementById('finalScore')
 const saveHighScoreForm = document.getElementById('saveHighScoreForm')
 const scoreMessage = document.getElementById('scoreMessage')
-const playAgainBtn = document.getElementById('playAgainBtn')
+const playAgainBtns = document.querySelectorAll('.playAgainBtn')
+const goHomeBtn = document.getElementById('goHome')
 
 const mostRecentscore = +localStorage.getItem('mostRecentScore')
-
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 
-const isValidHighScore = (!highScores.length && mostRecentscore > 30)
+playAgainBtns.forEach(button => button.addEventListener('click', () => window.location.assign('/game.html')))
+
+goHomeBtn.addEventListener('click', () => window.location.assign('/'))
+
+const isValidHighScore = (highScores.length === 0 && mostRecentscore > 30)
   ? true
   : highScores.some((highScore) => (mostRecentscore > highScore.score))
 
-console.log(isValidHighScore)
 
 if (isValidHighScore) {
   // show save high score 
@@ -22,7 +25,7 @@ if (isValidHighScore) {
 } else {
   // show congratulatory message
   scoreMessage.innerText = 'Your score is';
-  playAgainBtn.classList.remove('hidden')
+  playAgainBtns[1].classList.remove('hidden')
 }
 
 // displaying the final score;

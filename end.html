@@ -19,7 +19,11 @@
         </h2>
         <h2 id="finalScore"></h2>
 
-        <form id="saveHighScoreForm" class="hidden">
+        <form
+          id="saveHighScoreForm"
+          onsubmit="event.preventDefault()"
+          class="hidden"
+        >
           <input
             type="text"
             name="username"
@@ -37,11 +41,11 @@
             Save
           </button>
 
-          <button class="btn" href="/game.html">Play Again</button>
-          <button class="btn" href="/">Go Home</button>
+          <button class="btn playAgainBtn" href="game.html">Play Again</button>
+          <button class="btn" id="goHome" href="/">Go Home</button>
         </form>
 
-        <button class="btn hidden" id="playAgainBtn" href="/game.html">
+        <button class="btn playAgainBtn hidden" href="game.html">
           Play Again
         </button>
       </div>
