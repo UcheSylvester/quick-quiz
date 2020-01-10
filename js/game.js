@@ -135,7 +135,7 @@ const getNewQuestion = () => {
   // Display the choices
   choices.forEach(choice => {
     const number = choice.dataset['number']
-    choice.innerText = decodeHTMLCharacters(currentQuestion["choice" + number])
+    choice.innerText = currentQuestion["choice" + number]
 
   })
 
