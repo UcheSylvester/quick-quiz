@@ -2,7 +2,7 @@ div.container {
   flex-direction: column;
 }
 
-form.difficulty-form {
+form#difficultyForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,25 +13,25 @@ form.difficulty-form {
   transition: all 0.5s;
 }
 
-form.difficulty-form:hover {
+form#difficultyForm:hover {
   box-shadow: 0 1.4rem 3.4rem 0 rgba(86, 185, 213, 0.5);
   transition: all 0.5s;
-  width: 53rem;
+  width: 51rem;
 }
 
-form.difficulty-form h3 {
+form#difficultyForm h3 {
   color: #56a5eb;
   font-size: 2.5rem;
   margin-bottom: 3rem;
 }
 
-form.difficulty-form div {
+form#difficultyForm div {
   display: flex;
   flex-direction: row;
   font-size: 1.4rem;
 }
 
-form.difficulty-form input {
+form#difficultyForm input {
   width: 5rem;
   box-shadow: none;
 }

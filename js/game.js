@@ -7,11 +7,13 @@ const game = document.getElementById('game');
 const loader = document.querySelector('.loader')
 const passed = document.getElementById('passed')
 const failed = document.getElementById('failed')
+const difficultyInputs = Array.from(document.querySelectorAll('form#difficultyForm input'))
+const difficultyForm = document.getElementById('difficultyForm')
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 10;
 
-const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple'
+
 
 let currentQuestion = {}
 let acceptingAnswers = false;
@@ -23,41 +25,69 @@ let passedCounter = 0;
 let failedCounter = 0;
 let questions = []
 
-// POSSIBLE SPECIAL CHARACTERS &#039; = '  &quot; = "  
+let apiURL = ""
+
+
+// https://opentdb.com/api.php?amount=10&difficulty=easy
+// https://opentdb.com/api.php?amount=10&difficulty=hard
+//  https://opentdb.com/api.php?amount=10&difficulty=medium
+
+// difficultyInputs.forEach(input => input.addEventListener('click', (e) => getLevel(e)))
+
+// getLevel = (e) => `https://opentdb.com/api.php?amount=10&type=${e.target.value}`
+
+// console.log(getLevel())
+
+const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple'
+
+
 const decodeHTMLCharacters = (sentence) => sentence.
   replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&amp;/g, '&')
   .replace(/&lrm;/g, "");
 
+// Setting game difficulty from users input
+difficultyInputs.forEach(input => input.addEventListener('click', e => {
+  getQuestions(e)
+}))
 
-fetch(API_URL)
-  .then(response => response.json())
-  .then(loadedQuestions => {
+// const
+const getQuestions = (e) => {
+  // showing the loader and removing the form
+  loader.classList.remove('hidden')
+  difficultyForm.style.display = "none"
 
-    // formating the loaded question into what we need
-    const formattedQuestions = loadedQuestions.results.map(loadedQuestion => {
-      // console.log(loadedQuestion.correct_answer)
-      const formattedQuestion = {
-        question: loadedQuestion.question,
-      }
+  apiURL = `https://opentdb.com/api.php?amount=10&difficulty=${e.target.value}`
 
-      const answerChoices = [...loadedQuestion.incorrect_answers];
-      formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
 
-      answerChoices.splice(formattedQuestion.answer - 1, 0, loadedQuestion.correct_answer)
+  fetch(apiURL)
+    .then(response => response.json())
+    .then(loadedQuestions => {
 
-      answerChoices.forEach((choice, index) => {
-        formattedQuestion[`choice${index + 1}`] = choice;
+      // formating the loaded question into what we need
+      const formattedQuestions = loadedQuestions.results.map(loadedQuestion => {
+        // console.log(loadedQuestion.correct_answer)
+        const formattedQuestion = {
+          question: loadedQuestion.question,
+        }
+
+        const answerChoices = [...loadedQuestion.incorrect_answers];
+        formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
+
+        answerChoices.splice(formattedQuestion.answer - 1, 0, loadedQuestion.correct_answer)
+
+        answerChoices.forEach((choice, index) => {
+          formattedQuestion[`choice${index + 1}`] = choice;
+        })
+
+        return formattedQuestion
       })
 
-      return formattedQuestion
+      questions = formattedQuestions
+
+      startGame()
     })
-
-    questions = formattedQuestions
-
-    startGame()
-  })
-  .catch(err => console.log(err))
-
+    .catch(err => console.log(err))
+}
 
 
 const startGame = () => {
