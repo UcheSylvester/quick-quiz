@@ -87,7 +87,7 @@ const getNewQuestion = () => {
     localStorage.setItem('mostRecentScore', score)
 
     // go to end page
-    return window.location.assign("/end.html")
+    return window.location.assign("../pages/end.html")
   }
 
   // Increasing the question couter and progressbar
