@@ -82,6 +82,13 @@ h3 {
 .hidden {
   display: none;
 }
+.grid-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+  justify-self: center;
+  align-self: center;
+}
 
 /* BUTTONS */
 .btn {

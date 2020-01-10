@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Quiz Time - Play</title>
-    <link rel="icon" type="image/x-icon" href="icon.png" />
+    <link rel="icon" type="image/x-icon" href="../images/icon.png" />
 
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="game.css" />
+    <link rel="stylesheet" href="../css/app.css" />
+    <link rel="stylesheet" href="../css/game.css" />
   </head>
   <body>
     <div class="container">
       <!-- <div class="loader"></div> -->
       <div id="game" class="justify-center flex-column hidden">
         <div id="hud">
-          <div id="hud-item">
+          <div class="full-width" id="hud-item">
             <p id="progressText" class="hud-prefix">
               Question
             </p>
@@ -25,7 +25,7 @@
             </div>
           </div>
 
-          <div class="hud-item flex-row">
+          <div class="justify-content-left-sm hud-item grid-center">
             <p class="hud-prefix" id="passed">Passed - 0</p>
             <p class="hud-prefix" id="failed">Failed - 0</p>
           </div>
@@ -74,5 +74,5 @@
     </div>
   </body>
 
-  <script src="game.js"></script>
+  <script src="../js/game.js"></script>
 </html>
