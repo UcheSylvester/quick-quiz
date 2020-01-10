@@ -21,8 +21,13 @@ let availableQuestions = []
 let correctAnswer
 let passedCounter = 0;
 let failedCounter = 0;
-
 let questions = []
+
+// POSSIBLE SPECIAL CHARACTERS &#039; = '  &quot; = "  
+const decodeHTMLCharacters = (sentence) => sentence.
+  replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&amp;/g, '&')
+  .replace(/&lrm;/g, "");
+
 
 fetch(API_URL)
   .then(response => response.json())
@@ -73,6 +78,7 @@ const startGame = () => {
 
 }
 
+
 const getNewQuestion = () => {
   // when questions are finished or we've reached the maximum number of question a user can anwser
   // go to end page
@@ -94,13 +100,16 @@ const getNewQuestion = () => {
   currentQuestion = availableQuestions[newQestionIndex]
 
   // Display the current question 
-  question.innerText = currentQuestion.question;
+  question.innerText = decodeHTMLCharacters(currentQuestion.question)
 
   // Display the choices
   choices.forEach(choice => {
     const number = choice.dataset['number']
-    choice.innerText = currentQuestion["choice" + number]
+    choice.innerText = decodeHTMLCharacters(currentQuestion["choice" + number])
+
   })
+
+
 
   // removing the current question so it doesn't get asked again
   availableQuestions.splice(newQestionIndex, 1);
