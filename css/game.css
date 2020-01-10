@@ -8,10 +8,21 @@ form.difficulty-form {
   align-items: center;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 213, 0.5);
   width: 50em;
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: all 0.5s;
+}
+
+form.difficulty-form:hover {
+  box-shadow: 0 1.4rem 3.4rem 0 rgba(86, 185, 213, 0.5);
+  transition: all 0.5s;
+  width: 53rem;
 }
 
 form.difficulty-form h3 {
   color: #56a5eb;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 form.difficulty-form div {
@@ -81,7 +92,6 @@ form.difficulty-form input {
   margin-bottom: 0;
 }
 
-
 #progressBar {
   width: 20rem;
   height: 4rem;
@@ -131,7 +141,7 @@ div.loader {
 
 /* MEDIA QUERIES */
 
-@media(max-width:600px){
+@media (max-width: 600px) {
   #question {
     font-size: 2rem;
   }
@@ -153,7 +163,7 @@ div.loader {
     grid-column: 1/-1;
   }
   .justify-content-left-sm {
-    justify-self: left ;
+    justify-self: left;
   }
   .justify-content-left-sm #hud-prefix {
     text-align: left;
