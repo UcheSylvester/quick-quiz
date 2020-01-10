@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="loader"></div>
+      <!-- <div class="loader"></div> -->
       <div id="game" class="justify-center flex-column hidden">
         <div id="hud">
           <div id="hud-item">
@@ -62,6 +62,15 @@
           <p class="choice-text" data-number="4"></p>
         </div>
       </div>
+
+      <form class="difficulty-form">
+        <h3>Choose your game difficulty:</h3>
+        <div>
+          <input type="radio" name="difficulty" value="easy" /> Easy<br />
+          <input type="radio" name="difficulty" value="medium" /> Medium<br />
+          <input type="radio" name="difficulty" value="hard" /> Hard<br />
+        </div>
+      </form>
     </div>
   </body>
 

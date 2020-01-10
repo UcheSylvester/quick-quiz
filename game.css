@@ -1,3 +1,30 @@
+div.container {
+  flex-direction: column;
+}
+
+form.difficulty-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 213, 0.5);
+  width: 50em;
+}
+
+form.difficulty-form h3 {
+  color: #56a5eb;
+}
+
+form.difficulty-form div {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.4rem;
+}
+
+form.difficulty-form input {
+  width: 5rem;
+  box-shadow: none;
+}
+
 .choice-container {
   display: flex;
   margin-bottom: 0.5rem;
