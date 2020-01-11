@@ -176,4 +176,12 @@ div.loader {
   .justify-content-left-sm #hud-prefix {
     text-align: left;
   }
+
+  form#difficultyForm {
+    max-width: 45rem;
+  }
+
+  form#difficultyForm:hover {
+    max-width: 47rem;
+  }
 }
