@@ -121,7 +121,6 @@ const getNewQuestion = () => {
 
   // Display the choices
   choices.forEach(choice => {
-    console.log(choice)
     const number = choice.dataset['number']
     choice.innerText = currentQuestion["choice" + number]
 
