@@ -37,6 +37,7 @@ form#difficultyForm div {
 form#difficultyForm input {
   width: 5rem;
   box-shadow: none;
+  margin-bottom: 0;
 }
 
 .choice-container {
