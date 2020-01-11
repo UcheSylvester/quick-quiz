@@ -9,7 +9,9 @@ const goHomeBtn = document.getElementById('goHome')
 const mostRecentscore = +localStorage.getItem('mostRecentScore')
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 
-playAgainBtns.forEach(button => button.addEventListener('click', () => window.location.assign('/game.html')))
+console.log(playAgainBtns)
+
+playAgainBtns.forEach(button => button.addEventListener('click', () => window.location.assign('/pages/game.html')))
 
 goHomeBtn.addEventListener('click', () => window.location.assign('/'))
 

@@ -7,7 +7,7 @@ form#difficultyForm {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 213, 0.5);
-  width: 50em;
+  max-width: 50rem;
   padding: 2rem;
   border-radius: 1rem;
   transition: all 0.5s;
@@ -16,7 +16,7 @@ form#difficultyForm {
 form#difficultyForm:hover {
   box-shadow: 0 1.4rem 3.4rem 0 rgba(86, 185, 213, 0.5);
   transition: all 0.5s;
-  width: 51rem;
+  max-width: 51rem;
 }
 
 form#difficultyForm h3 {
@@ -28,6 +28,9 @@ form#difficultyForm h3 {
 form#difficultyForm div {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   font-size: 1.4rem;
 }
 
