@@ -27,17 +27,6 @@ let questions = []
 
 let apiURL = ""
 
-
-// https://opentdb.com/api.php?amount=10&difficulty=easy
-// https://opentdb.com/api.php?amount=10&difficulty=hard
-//  https://opentdb.com/api.php?amount=10&difficulty=medium
-
-// difficultyInputs.forEach(input => input.addEventListener('click', (e) => getLevel(e)))
-
-// getLevel = (e) => `https://opentdb.com/api.php?amount=10&type=${e.target.value}`
-
-// console.log(getLevel())
-
 const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple'
 
 
@@ -46,9 +35,7 @@ const decodeHTMLCharacters = (sentence) => sentence.
   .replace(/&lrm;/g, "");
 
 // Setting game difficulty from users input
-difficultyInputs.forEach(input => input.addEventListener('click', e => {
-  getQuestions(e)
-}))
+difficultyInputs.forEach(input => input.addEventListener('click', e => getQuestions(e)))
 
 // const
 const getQuestions = (e) => {
@@ -57,7 +44,6 @@ const getQuestions = (e) => {
   difficultyForm.style.display = "none"
 
   apiURL = `https://opentdb.com/api.php?amount=10&difficulty=${e.target.value}`
-
 
   fetch(apiURL)
     .then(response => response.json())
@@ -74,6 +60,7 @@ const getQuestions = (e) => {
         formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
 
         answerChoices.splice(formattedQuestion.answer - 1, 0, loadedQuestion.correct_answer)
+        // console.log(answerChoices)
 
         answerChoices.forEach((choice, index) => {
           formattedQuestion[`choice${index + 1}`] = choice;
@@ -134,6 +121,7 @@ const getNewQuestion = () => {
 
   // Display the choices
   choices.forEach(choice => {
+    console.log(choice)
     const number = choice.dataset['number']
     choice.innerText = currentQuestion["choice" + number]
 
