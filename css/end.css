@@ -53,10 +53,23 @@ h2#finalScore {
   z-index: 0;
 }
 
+#shareBtn {
+  background: #75b6f0;
+  color: white;
+  font-weight: bold;
+  will-change: background;
+  transition: background 0.5s;
+}
+
+#shareBtn:hover {
+  transition: background 0.5s;
+  background: #56a5eb;
+}
+
 /* MEDIA QURIES */
 @media (min-width: 880px) {
   .shareContainer {
-    width: 30%;
+    width: 40%;
   }
 }
 
