@@ -85,18 +85,46 @@ const saveHighScore = (e) => {
 //   }
 // })
 
+
 const showShareBtn = () => {
   const score = finalScore.innerHTML
   const title = window.document.title.replace(/ - Congrats/g, '');
   const url = "https://quiz-time.netlify.com/";
   console.log(score, title, url)
 
-  shareBtnContainer.innerHTML = `
-    <button class="button" data-sharer="twitter" data-title="I played ${title} and scored ${score}! Play now!" data-hashtags="awesome, QuizTime" data-url="${url}">Share on Twitter</button>
-  
-    `
+  if (navigator.share) {
+    const data = {
+      url: url,
+      text: `I played ${title} and got a score of ${score} 😄😄🔥🚀🔥🚀! Give it a try! #awesome #QuizTime @UCylvester`
+    }
 
-  window.Sharer.init();
+    navigator.share(data)
+      .then(data => console.log('Thanks for sharing', data))
+      .catch(console.error)
+  } else {
+    shareBtn.classList.add('hidden')
+
+    shareBtnContainer.innerHTML = `
+      <button 
+        class="share-btn" 
+        data-sharer="twitter" 
+        data-via="UCylvester" 
+        data-title="I played ${title} and got a score of ${score} 😄😄🔥🚀🔥🚀! Give it a try!" 
+        data-hashtags="awesome, QuizTime" data-url="${url}"
+      >
+        <img src="/images/twitter.png">
+      </button>
+      <button 
+        class="share-btn" 
+        data-sharer="facebook" 
+        data-hashtag="QuizTime" 
+        data-url="${url}"
+      >
+        <img src="/images/facebook.png">
+      </button>
+    `
+    window.Sharer.init();
+  }
 }
 
 window.addEventListener('DOMContentLoaded', showShareBtn)

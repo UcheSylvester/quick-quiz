@@ -148,6 +148,11 @@ h2#finalScore {
   color: #08355c;
 }
 
+#shareBtnContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 450px) {
   h2#scoreMessage {
     font-size: 3rem;
