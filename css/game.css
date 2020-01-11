@@ -23,6 +23,7 @@ form#difficultyForm h3 {
   color: #56a5eb;
   font-size: 2.5rem;
   margin-bottom: 3rem;
+  text-align: center;
 }
 
 form#difficultyForm div {
