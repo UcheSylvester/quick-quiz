@@ -185,4 +185,8 @@ div.loader {
   form#difficultyForm:hover {
     max-width: 47rem;
   }
+
+  form#difficultyForm input {
+    margin-bottom: 1rem;
+  }
 }

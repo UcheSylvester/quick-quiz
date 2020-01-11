@@ -40,8 +40,11 @@ difficultyInputs.forEach(input => input.addEventListener('click', e => getQuesti
 // const
 const getQuestions = (e) => {
   // showing the loader and removing the form
-  loader.classList.remove('hidden')
-  difficultyForm.style.display = "none"
+  setTimeout(() => {
+    difficultyForm.style.display = "none"
+    loader.classList.remove('hidden')
+  }, 150)
+
 
   apiURL = `https://opentdb.com/api.php?amount=10&difficulty=${e.target.value}`
 
