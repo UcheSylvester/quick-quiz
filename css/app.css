@@ -148,7 +148,7 @@ h2#finalScore {
   color: #08355c;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   h2#scoreMessage {
     font-size: 3rem;
   }

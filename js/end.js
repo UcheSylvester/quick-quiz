@@ -6,10 +6,11 @@ const scoreMessage = document.getElementById('scoreMessage')
 const playAgainBtns = document.querySelectorAll('.playAgainBtn')
 const goHomeBtn = document.getElementById('goHome')
 
+const shareBtn = document.getElementById('shareBtn')
+const shareBtnContainer = document.getElementById('shareBtnContainer')
+
 const mostRecentscore = +localStorage.getItem('mostRecentScore')
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
-
-console.log(playAgainBtns)
 
 playAgainBtns.forEach(button => button.addEventListener('click', () => window.location.assign('/pages/game.html')))
 
@@ -58,3 +59,44 @@ const saveHighScore = (e) => {
   window.location.assign('/')
 
 }
+
+
+// shareBtn.addEventListener('click', () => {
+//   const score = finalScore.innerHTML
+//   const title = window.document.title.replace(/ - Congrats/g, '');
+//   const url = "https://quiz-time.netlify.com/";
+
+//   const data = {
+//     url: url,
+//     text: `I scored ${score} in ${title}! Play now!`
+//   }
+
+//   console.log(data)
+
+//   if (navigator.share) {
+//     console.log('share')
+
+//     navigator.share(data)
+//       .then(console.log('thanks for sharing'))
+//       .catch(console.error)
+
+//   } else {
+//     console.log('no')
+//   }
+// })
+
+const showShareBtn = () => {
+  const score = finalScore.innerHTML
+  const title = window.document.title.replace(/ - Congrats/g, '');
+  const url = "https://quiz-time.netlify.com/";
+  console.log(score, title, url)
+
+  shareBtnContainer.innerHTML = `
+    <button class="button" data-sharer="twitter" data-title="I played ${title} and scored ${score}! Play now!" data-hashtags="awesome, QuizTime" data-url="${url}">Share on Twitter</button>
+  
+    `
+
+  window.Sharer.init();
+}
+
+window.addEventListener('DOMContentLoaded', showShareBtn)
