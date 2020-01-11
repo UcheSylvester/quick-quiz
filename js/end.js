@@ -77,12 +77,27 @@ const share = () => {
     }
 
     navigator.share(data)
-      .then(data => console.log('Thanks for sharing', data))
-      .catch(console.error)
+      .then(data => {
+        // overlay.classList.add('hidden')
+        shareContainer.innerHTML = `
+          <p>Thanks for sharing! 🙌🙌🔥🚀🔥🚀</p>
+        `
+        shareContainer.classList.remove('hidden')
+        overlay.classList.remove('hidden')
+      })
+      .catch(() => {
+        overlay.classList.add('hidden')
+        shareContainer.innerHTML = `
+          <p>An error occurred and we couldn't share post right now. Try again later 😓☹😏</p>
+        `
+        shareContainer.classList.remove('hidden')
+        overlay.classList.remove('hidden')
+
+      })
   } else {
 
     shareContainer.innerHTML = `
-    <p>Share now:</p>
+    <p>Share now!</p>
       <div>
         <button 
           class="share-btn" 
