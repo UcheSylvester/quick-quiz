@@ -102,6 +102,7 @@ h3 {
   text-decoration: none;
   color: #56a5eb;
   background-color: white;
+  border-radius: 0.5rem;
 }
 
 .btn:hover {
@@ -136,29 +137,4 @@ input {
 
 input::placeholder {
   color: #aaaaaa;
-}
-
-/* SAVE HIGH SCORE FORM */
-h2#scoreMessage {
-  color: #08355c;
-  margin-bottom: 0.5rem;
-}
-
-h2#finalScore {
-  color: #08355c;
-}
-
-#shareBtnContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (max-width: 450px) {
-  h2#scoreMessage {
-    font-size: 3rem;
-  }
-
-  h1#congrats {
-    font-size: 3.5rem;
-  }
 }

@@ -5,9 +5,10 @@ const saveHighScoreForm = document.getElementById('saveHighScoreForm')
 const scoreMessage = document.getElementById('scoreMessage')
 const playAgainBtns = document.querySelectorAll('.playAgainBtn')
 const goHomeBtn = document.getElementById('goHome')
+const overlay = document.querySelector('.overlay')
 
 const shareBtn = document.getElementById('shareBtn')
-const shareBtnContainer = document.getElementById('shareBtnContainer')
+const shareContainer = document.querySelector('.shareContainer')
 
 const mostRecentscore = +localStorage.getItem('mostRecentScore')
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
@@ -61,36 +62,13 @@ const saveHighScore = (e) => {
 }
 
 
-// shareBtn.addEventListener('click', () => {
-//   const score = finalScore.innerHTML
-//   const title = window.document.title.replace(/ - Congrats/g, '');
-//   const url = "https://quiz-time.netlify.com/";
-
-//   const data = {
-//     url: url,
-//     text: `I scored ${score} in ${title}! Play now!`
-//   }
-
-//   console.log(data)
-
-//   if (navigator.share) {
-//     console.log('share')
-
-//     navigator.share(data)
-//       .then(console.log('thanks for sharing'))
-//       .catch(console.error)
-
-//   } else {
-//     console.log('no')
-//   }
-// })
-
-
-const showShareBtn = () => {
+const share = () => {
   const score = finalScore.innerHTML
   const title = window.document.title.replace(/ - Congrats/g, '');
   const url = "https://quiz-time.netlify.com/";
   console.log(score, title, url)
+
+  overlay.classList.remove('hidden')
 
   if (navigator.share) {
     const data = {
@@ -102,29 +80,38 @@ const showShareBtn = () => {
       .then(data => console.log('Thanks for sharing', data))
       .catch(console.error)
   } else {
-    shareBtn.classList.add('hidden')
 
-    shareBtnContainer.innerHTML = `
-      <button 
-        class="share-btn" 
-        data-sharer="twitter" 
-        data-via="UCylvester" 
-        data-title="I played ${title} and got a score of ${score} 😄😄🔥🚀🔥🚀! Give it a try!" 
-        data-hashtags="awesome, QuizTime" data-url="${url}"
-      >
-        <img src="/images/twitter.png">
-      </button>
-      <button 
-        class="share-btn" 
-        data-sharer="facebook" 
-        data-hashtag="QuizTime" 
-        data-url="${url}"
-      >
-        <img src="/images/facebook.png">
-      </button>
+    shareContainer.innerHTML = `
+    <p>Share now:</p>
+      <div>
+        <button 
+          class="share-btn" 
+          data-sharer="twitter" 
+          data-via="UCylvester" 
+          data-title="I played ${title} and got a score of ${score} 😄😄🔥🚀🔥🚀! Give it a try!" 
+          data-hashtags="awesome, QuizTime" data-url="${url}"
+        >
+          <img src="/images/twitter.png">
+        </button>
+        <button 
+          class="share-btn" 
+          data-sharer="facebook" 
+          data-hashtag="QuizTime" 
+          data-url="${url}"
+        >
+          <img src="/images/facebook.png">
+        </button>
+      </div>
     `
+
+    shareContainer.classList.remove('hidden')
     window.Sharer.init();
   }
 }
 
-window.addEventListener('DOMContentLoaded', showShareBtn)
+overlay.addEventListener('click', () => {
+  shareContainer.classList.add('hidden')
+  overlay.classList.add('hidden')
+})
+
+shareBtn.addEventListener('click', share)
