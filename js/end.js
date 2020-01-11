@@ -87,9 +87,10 @@ const share = () => {
         <button 
           class="share-btn" 
           data-sharer="twitter" 
+          data-hashtags="awesome, QuizTime" 
+          data-url="${url}"
           data-via="UCylvester" 
           data-title="I played ${title} and got a score of ${score} 😄😄🔥🚀🔥🚀! Give it a try!" 
-          data-hashtags="awesome, QuizTime" data-url="${url}"
         >
           <img src="/images/twitter.png">
         </button>
