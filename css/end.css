@@ -20,7 +20,6 @@ h2#finalScore {
 }
 
 .shareContainer div {
-  /* background-color: red; */
   justify-content: center;
   display: flex;
 }
