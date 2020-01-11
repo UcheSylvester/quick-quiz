@@ -76,7 +76,13 @@ const getQuestions = (e) => {
 
       startGame()
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      loader.classList.add('hidden')
+      difficultyForm.style.display = "block"
+      difficultyForm.classList.add('error')
+
+      difficultyForm.innerText = `An error occurred, please try again later 😒😒😓`
+    })
 }
 
 
