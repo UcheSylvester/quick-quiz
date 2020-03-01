@@ -182,7 +182,7 @@ const getCorrectAnswer = choices => {
 
   setTimeout(() => {
     correctAnswer.classList.remove("correct");
-  }, 700);
+  }, 1000);
 };
 
 // Check for correct answer

@@ -26,3 +26,39 @@ self.addEventListener("install", installEvent => {
       .catch(err => console.log(err))
   );
 });
+
+self.addEventListener("fetch", fetchEvent => {
+  const { request } = fetchEvent;
+  console.log(request.url);
+
+  fetchEvent.respondWith(
+    caches
+      .match(request)
+      .then(response => {
+        // return response || fetch(fetchEvent.request);
+        if (response) {
+          return response;
+        }
+
+        // return fetch(request);
+
+        if (!request.url.includes("https://opentdb.com/api.php?")) {
+          return fetch(request);
+        } else {
+          return fetch(fetchEvent.request).then(response => {
+            console.log(response);
+            console.log(response?.url, "res");
+
+            return caches
+              .open(cacheName)
+              .then(cache => {
+                cache.put(request.url, response.clone());
+                return response;
+              })
+              .catch(console.log);
+          });
+        }
+      })
+      .catch(err => console.log(err))
+  );
+});
