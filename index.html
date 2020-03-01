@@ -17,4 +17,14 @@
       </div>
     </div>
   </body>
+  <script>
+    if (navigator.serviceWorker) {
+      window.addEventListener("load", e => {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(e => console.log("service worker registered successfully! :)"))
+          .catch(err => console.log("service worker was not registered :("));
+      });
+    }
+  </script>
 </html>
