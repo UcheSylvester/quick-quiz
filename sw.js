@@ -44,9 +44,9 @@ self.addEventListener("fetch", fetchEvent => {
         if (!request.url.includes("https://opentdb.com/api.php?")) {
           return fetch(request);
         } else {
-          console.log(request.url);
+          // console.log(request.url);
           return fetch(request).then(response => {
-            console.log(response);
+            // console.log(response);
 
             return caches
               .open(dynamicCache)

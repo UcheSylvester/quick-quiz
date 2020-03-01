@@ -49,6 +49,32 @@ difficultyInputs.forEach(input =>
   input.addEventListener("click", event => getQuestions(event))
 );
 
+const formatLoadedQuestions = loadedQuestions => {
+  const formattedQuestions = loadedQuestions.results.map(loadedQuestion => {
+    // console.log(loadedQuestion.correct_answer)
+    const formattedQuestion = {
+      question: loadedQuestion.question
+    };
+
+    const answerChoices = [...loadedQuestion.incorrect_answers];
+    formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
+
+    answerChoices.splice(
+      formattedQuestion.answer - 1,
+      0,
+      loadedQuestion.correct_answer
+    );
+
+    answerChoices.forEach((choice, index) => {
+      formattedQuestion[`choice${index + 1}`] = choice;
+    });
+
+    return formattedQuestion;
+  });
+
+  return formattedQuestions;
+};
+
 const getQuestions = e => {
   // adding delay before showing loader and hiding the form
   setTimeout(() => {
@@ -62,31 +88,7 @@ const getQuestions = e => {
     .then(response => response.json())
     .then(loadedQuestions => {
       // formating the loaded question into what we need
-      const formattedQuestions = loadedQuestions.results.map(loadedQuestion => {
-        // console.log(loadedQuestion.correct_answer)
-        const formattedQuestion = {
-          question: loadedQuestion.question
-        };
-
-        const answerChoices = [...loadedQuestion.incorrect_answers];
-        formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
-
-        answerChoices.splice(
-          formattedQuestion.answer - 1,
-          0,
-          loadedQuestion.correct_answer
-        );
-
-        answerChoices.forEach((choice, index) => {
-          formattedQuestion[`choice${index + 1}`] = choice;
-        });
-
-        return formattedQuestion;
-      });
-
-      questions = formattedQuestions;
-
-      console.log(questions);
+      questions = formatLoadedQuestions(loadedQuestions);
 
       loader.classList.add("hidden");
 
