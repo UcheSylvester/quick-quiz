@@ -46,11 +46,11 @@ const decodeHTMLCharacters = sentence =>
 
 // Setting game difficulty from users input
 difficultyInputs.forEach(input =>
-  input.addEventListener("click", e => getQuestions(e))
+  input.addEventListener("click", event => getQuestions(event))
 );
 
 const getQuestions = e => {
-  // showing the loader and removing the form
+  // adding delay before showing loader and hiding the form
   setTimeout(() => {
     difficultyForm.style.display = "none";
     loader.classList.remove("hidden");
@@ -86,9 +86,14 @@ const getQuestions = e => {
 
       questions = formattedQuestions;
 
+      console.log(questions);
+
+      loader.classList.add("hidden");
+
       startGame();
     })
     .catch(err => {
+      console.log(err);
       loader.classList.add("hidden");
       difficultyForm.style.display = "block";
       difficultyForm.classList.add("error");
@@ -106,12 +111,12 @@ const startGame = () => {
   passedCounter = 0;
   availableQuestions = [...questions];
 
-  // Getting a new question
-  getNewQuestion();
-
-  // Removing and adding loader
+  // Removing loader and showing game
   loader.classList.add("hidden");
   game.classList.remove("hidden");
+
+  // Getting a new question
+  getNewQuestion();
 };
 
 const getNewQuestion = () => {

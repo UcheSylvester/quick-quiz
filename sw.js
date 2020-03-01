@@ -1,4 +1,5 @@
-const cacheName = "quick-quiz-v1";
+const staticCache = "static-quick-quiz-v1";
+const dynamicCache = "dynamic-quick-quiz-v1";
 
 const assets = [
   "/",
@@ -21,7 +22,7 @@ const assets = [
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches
-      .open(cacheName)
+      .open(staticCache)
       .then(cache => cache.addAll(assets))
       .catch(err => console.log(err))
   );
@@ -29,7 +30,7 @@ self.addEventListener("install", installEvent => {
 
 self.addEventListener("fetch", fetchEvent => {
   const { request } = fetchEvent;
-  console.log(request.url);
+  // console.log(request.url);
 
   fetchEvent.respondWith(
     caches
@@ -40,22 +41,20 @@ self.addEventListener("fetch", fetchEvent => {
           return response;
         }
 
-        // return fetch(request);
-
         if (!request.url.includes("https://opentdb.com/api.php?")) {
           return fetch(request);
         } else {
-          return fetch(fetchEvent.request).then(response => {
+          console.log(request.url);
+          return fetch(request).then(response => {
             console.log(response);
-            console.log(response?.url, "res");
 
             return caches
-              .open(cacheName)
+              .open(dynamicCache)
               .then(cache => {
                 cache.put(request.url, response.clone());
                 return response;
               })
-              .catch(console.log);
+              .catch(err => console.log(err));
           });
         }
       })
